@@ -1,15 +1,24 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Config")]
     [SerializeField] MovementConfig movementConfig;
 
+    [Header("Rules")]
+    [SerializeField] ScriptableRule movementRule;
+
     private Rigidbody2D rb;
-    
     private PlayerInputHandler playerInputHandler;
 
     private Vector2 moveInput;
-    private bool canMove = true;
+
+
+    private RuleListener movementRuleListener;
+    private bool canMove;
+    private void OnEnableMove() => canMove = true;
+    private void OnDisableMove() => canMove = false;
 
 
     private void Awake()
@@ -17,9 +26,19 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerInputHandler = GetComponent<PlayerInputHandler>();
 
+        movementRuleListener = new RuleListener(movementRule, OnEnableMove, OnDisableMove);
+        movementRuleListener.AddSubscription();
+
         playerInputHandler.OnMovePerformed += GetMoveInput;
     }
-    
+
+    private void OnDestroy()
+    {
+        movementRuleListener.RemoveSubscription();
+        playerInputHandler.OnMovePerformed -= GetMoveInput;
+    }
+
+
 
     private void FixedUpdate()
     {
@@ -32,5 +51,7 @@ public class PlayerMovement : MonoBehaviour
     {
         this.moveInput = moveInput;
     }
+
+
 
 }
