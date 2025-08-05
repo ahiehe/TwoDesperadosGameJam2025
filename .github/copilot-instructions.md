@@ -2,7 +2,7 @@
 - Project name: TwoDesperadosGameJam2025
 - Unity version: Unity 6000.1.14f1
 - Active game object:
-  - Name: RuleManager
+  - Name: ActiveRulesZone
   - Tag: Untagged
-  - Layer: Default
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

@@ -25,6 +25,11 @@ public class RuleManager : MonoBehaviour
             AddRule(rule);
             ActivateRule(rule.ruleName);
         }
+
+        foreach (var rule in allRulesOnThisLevel)
+        {
+            AddRule(rule);
+        }
     }
 
     private void DeactivateAllRules()
@@ -37,6 +42,7 @@ public class RuleManager : MonoBehaviour
 
     public void AddRule(ScriptableRule newRule)
     {
+        if (existingRules.ContainsKey(newRule.ruleName)) return;
         existingRules.Add(newRule.ruleName, newRule);
     }
 
@@ -62,6 +68,16 @@ public class RuleManager : MonoBehaviour
     public bool HasRuleActivated(string ruleName)
     {
         return existingRules.TryGetValue(ruleName, out ScriptableRule rule) && rule.IsActive;
+    }
+
+    public List<ScriptableRule> GetActiveRules()
+    {
+        return existingRules.Values.Where(x => x.IsActive).ToList();
+    }
+
+    public List<ScriptableRule> GetInactiveRules()
+    {
+        return existingRules.Values.Where(x => !x.IsActive).ToList();
     }
 
 }
