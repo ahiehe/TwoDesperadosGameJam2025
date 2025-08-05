@@ -1,16 +1,19 @@
 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RuleManager : MonoBehaviour
 {
     public static RuleManager instance { get; private set; }
 
-    [SerializeField] private List<ScriptableRule> allRules;
+    [SerializeField] private List<ScriptableRule> allRulesOnThisLevel;
     [SerializeField] private List<ScriptableRule> startingRules;
-    private readonly int maxRules = 3;
 
-    private Dictionary<string, ScriptableRule> appliedRules = new ();
+    private readonly int maxRules = 3;
+    private int activeCount = 0;
+    private Dictionary<string, ScriptableRule> existingRules = new ();
+
 
     private void Awake()
     {
@@ -19,37 +22,46 @@ public class RuleManager : MonoBehaviour
         DeactivateAllRules();
         foreach(var rule in startingRules)
         {
-            ApplyRule(rule);
+            AddRule(rule);
+            ActivateRule(rule.ruleName);
         }
     }
 
     private void DeactivateAllRules()
     {
-        foreach (var rule in allRules)
+        foreach (var rule in allRulesOnThisLevel)
         {
             rule.Deactivate();
         }
     }
 
-    public void ApplyRule(ScriptableRule newRule)
+    public void AddRule(ScriptableRule newRule)
     {
-        if (appliedRules.Count >= maxRules || HasRuleActivated(newRule.ruleName)) return;
-        appliedRules.Add(newRule.ruleName, newRule);
-        newRule.Activate();
+        existingRules.Add(newRule.ruleName, newRule);
+    }
+
+    public void ActivateRule(string ruleName)
+    {
+        if (activeCount >= maxRules || HasRuleActivated(ruleName)) return;
+        ScriptableRule rule = existingRules[ruleName];
+        rule.Activate();
+        activeCount++;
+
     }
 
     public void DeactivateRule(string ruleName)
     {
         if (!HasRuleActivated(ruleName)) return;
 
-        appliedRules[ruleName].Deactivate();
-        appliedRules.Remove(ruleName);
+        ScriptableRule rule = existingRules[ruleName];
+        rule.Deactivate();
+        activeCount--;
 
     }
 
     public bool HasRuleActivated(string ruleName)
     {
-        return appliedRules.TryGetValue(ruleName, out ScriptableRule rule) && rule.IsActive;
+        return existingRules.TryGetValue(ruleName, out ScriptableRule rule) && rule.IsActive;
     }
 
 }
