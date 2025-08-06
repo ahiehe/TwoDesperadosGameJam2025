@@ -1,24 +1,33 @@
 using UnityEngine;
+using Cinemachine;
+using System;
 
 public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
+    public static GameObject PlayerObject { get; private set; }
 
-    private GameObject playerObject;
-    private void Start()
+    public static event Action OnPlayerCreation;
+    private void Awake()
     {
-        playerObject = Instantiate(playerPrefab,transform.position, Quaternion.identity);
-        PlayerHealth.OnRespawn += Respawn;
+        SpawnPlayer();
+        PlayerHealth.OnDeath += Respawn;
     }
 
     private void OnDestroy()
     {
-        PlayerHealth.OnRespawn -= Respawn;
+        PlayerHealth.OnDeath -= Respawn;
     }
 
     public void Respawn()
     {
-        Destroy(playerObject);
-        playerObject = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+        Destroy(PlayerObject);
+        SpawnPlayer();
+    }
+
+    private void SpawnPlayer()
+    {
+        PlayerObject = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+        OnPlayerCreation?.Invoke();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private GameObject playerSprite;
-    public static event Action OnRespawn;
+    public static event Action OnDeath;
 
     public void Die()
     {
@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
     {
         playerSprite.SetActive(false);
         yield return new WaitForSeconds(0.3f);
-        OnRespawn?.Invoke();
+        OnDeath?.Invoke();
         yield return new WaitForSeconds(0.1f);
 
     }
