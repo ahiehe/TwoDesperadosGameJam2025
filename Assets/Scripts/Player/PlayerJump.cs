@@ -15,7 +15,6 @@ public class PlayerJump : MonoBehaviour
 
     private Rigidbody2D rb;
     private Collider2D colider;
-    private PlayerInputHandler playerInputHandler;
 
 
     [SerializeField] LayerMask groundMask;
@@ -34,20 +33,19 @@ public class PlayerJump : MonoBehaviour
     private void InvertGravity() {
         gravityInverted = true;
         rb.gravityScale = -Mathf.Abs(rb.gravityScale);
-        playerInputHandler.transform.localScale = new Vector3(1f, -1f, 1f);
+        transform.localScale = new Vector3(1f, -1f, 1f);
     }
     private void MakeGravityNormal()
     {
         gravityInverted = false;
         rb.gravityScale = Mathf.Abs(rb.gravityScale);
-        playerInputHandler.transform.localScale = new Vector3(1f, 1f, 1f);
+        transform.localScale = new Vector3(1f, 1f, 1f);
     }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         colider = GetComponent<Collider2D>();
-        playerInputHandler = GetComponent<PlayerInputHandler>();
 
         jumpRuleListener = new RuleListener(jumpRule, EnableJump, DisableJump);
         jumpRuleListener.AddSubscription();
@@ -55,14 +53,14 @@ public class PlayerJump : MonoBehaviour
         gravityInvertedRuleListener = new RuleListener(invertedGravityRule, InvertGravity, MakeGravityNormal);
         gravityInvertedRuleListener.AddSubscription();
 
-        playerInputHandler.OnJumpPressed += TryJump;
+        PlayerInputHandler.instance.OnJumpPressed += TryJump;
     }
 
     private void OnDestroy()
     {
         jumpRuleListener.RemoveSubscription();
         gravityInvertedRuleListener.RemoveSubscription();
-        playerInputHandler.OnJumpPressed -= TryJump;
+        PlayerInputHandler.instance.OnJumpPressed -= TryJump;
     }
 
     private void TryJump()

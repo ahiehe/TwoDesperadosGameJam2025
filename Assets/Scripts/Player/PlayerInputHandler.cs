@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+
+    public static PlayerInputHandler instance;
     private PlayerInputs inputActions;
 
     public event Action<Vector2> OnMovePerformed;
@@ -12,6 +14,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         inputActions = new PlayerInputs();
 
         inputActions.Player.Move.performed += ctx => OnMovePerformed?.Invoke(ctx.ReadValue<Vector2>());

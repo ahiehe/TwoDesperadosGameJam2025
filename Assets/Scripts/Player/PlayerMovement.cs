@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ScriptableRule movementRule;
 
     private Rigidbody2D rb;
-    private PlayerInputHandler playerInputHandler;
 
     private Vector2 moveInput;
 
@@ -24,18 +23,18 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerInputHandler = GetComponent<PlayerInputHandler>();
+
 
         movementRuleListener = new RuleListener(movementRule, OnEnableMove, OnDisableMove);
         movementRuleListener.AddSubscription();
 
-        playerInputHandler.OnMovePerformed += GetMoveInput;
+        PlayerInputHandler.instance.OnMovePerformed += GetMoveInput;
     }
 
     private void OnDestroy()
     {
         movementRuleListener.RemoveSubscription();
-        playerInputHandler.OnMovePerformed -= GetMoveInput;
+        PlayerInputHandler.instance.OnMovePerformed -= GetMoveInput;
     }
 
 
