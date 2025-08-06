@@ -13,6 +13,12 @@ public class RuleListener
 
         onRuleActive = onRuleActivated;
         onRuleDeactive = onRuleDeactivated;
+
+        if (rule.IsActive) 
+        {
+            onRuleActivated();
+        }
+
     }
 
     public void AddSubscription()
