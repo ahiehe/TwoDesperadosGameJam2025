@@ -9,9 +9,9 @@ public class PlayerSpawner : MonoBehaviour
 
     public static event Action OnPlayerCreation;
     private void Awake()
-    {
-        SpawnPlayer();
+    {  
         PlayerHealth.OnDeath += Respawn;
+        SpawnPlayer();
     }
 
     private void OnDestroy()

@@ -11,11 +11,15 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
         virtualCam = GetComponent<CinemachineVirtualCamera>();
         defaultDistance = virtualCam.m_Lens.OrthographicSize;
-
         PlayerSpawner.OnPlayerCreation += SetCameraToDefault;
+    }
 
+    private void Start()
+    {
+        SetCameraToDefault();
     }
 
     private void OnDestroy()
