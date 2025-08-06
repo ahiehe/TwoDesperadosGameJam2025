@@ -25,11 +25,6 @@ public class RuleManager : MonoBehaviour
             AddRule(rule);
             ActivateRule(rule.ruleName);
         }
-
-        foreach (var rule in allRulesOnThisLevel)
-        {
-            AddRule(rule);
-        }
     }
 
     private void DeactivateAllRules()
