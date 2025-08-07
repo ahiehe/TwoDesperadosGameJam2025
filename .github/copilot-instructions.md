@@ -2,7 +2,7 @@
 - Project name: TwoDesperadosGameJam2025
 - Unity version: Unity 6000.1.14f1
 - Active game object:
-  - Name: SpikeRow
+  - Name: VirtCam
   - Tag: Untagged
-  - Layer: Hazard
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
