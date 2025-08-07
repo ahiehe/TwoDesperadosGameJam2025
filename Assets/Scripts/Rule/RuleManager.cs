@@ -8,6 +8,7 @@ public class RuleManager : MonoBehaviour
     public static RuleManager instance { get; private set; }
 
     [SerializeField] private List<ScriptableRule> allRulesOnThisLevel;
+
     [SerializeField] private List<ScriptableRule> startingRules;
 
     private readonly int maxRules = 3;
@@ -20,10 +21,10 @@ public class RuleManager : MonoBehaviour
         instance = this;
 
         DeactivateAllRules();
-        foreach(var rule in startingRules)
+        for (int i = 0; i < 3; i++)
         {
-            AddRule(rule);
-            ActivateRule(rule.ruleName);
+            AddRule(startingRules[i]);
+            ActivateRule(startingRules[i].ruleName);
         }
     }
 

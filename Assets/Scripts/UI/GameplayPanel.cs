@@ -8,6 +8,17 @@ public class GameplayPanel : MonoBehaviour
 
     [SerializeField] private GameObject ruleIconPrefab;
 
+    [Header("States")]
+    [SerializeField] private PlayerState playerState;
+
+    private CanvasGroup canvasGroup;
+
+    private void Awake()
+    {
+        canvasGroup = GetComponent<CanvasGroup>();
+
+    }
+
     private void OnEnable()
     {
         Time.timeScale = 1f;
@@ -20,8 +31,20 @@ public class GameplayPanel : MonoBehaviour
         {
             RefreshUI();
         }
-            
+
+        playerState.IsGroundedChanged += ChangeAlpha;
     }
+
+    private void OnDisable()
+    {
+        playerState.IsGroundedChanged -= ChangeAlpha;
+    }
+
+    private void ChangeAlpha(bool isGrounded)
+    {
+        canvasGroup.alpha = isGrounded ? 1f : 0.5f;
+    }
+
 
     public IEnumerator WaitRuleManager()
     {

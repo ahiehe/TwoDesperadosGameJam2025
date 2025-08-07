@@ -9,6 +9,7 @@ public class PlayerJump : MonoBehaviour
     [Header("Rules")]
     [SerializeField] ScriptableRule jumpRule;
     [SerializeField] ScriptableRule invertedGravityRule;
+    [SerializeField] ScriptableRule doubleJumpRule;
 
     [Header("Player sprite")]
     [SerializeField] GameObject playerSpriteObject;
@@ -25,12 +26,27 @@ public class PlayerJump : MonoBehaviour
     private Vector2 boxSize;
     private bool checkForGroundEnabled = true;
 
+    #region DoubleJumpRule
+    private RuleListener doubleJumpRuleListener;
+    private CounterWithDefault jumpCounter;
+    private void SetDoubleJump()
+    {
+        jumpCounter.SetDefault(2);
+    }
+    private void SetOneJump()
+    {
+        jumpCounter.SetDefault(1);
+    }
+    #endregion
+
+    #region JumpAvaibleRule
     private RuleListener jumpRuleListener;
     private bool canJump;
     private void EnableJump() => canJump = true;
     private void DisableJump() => canJump = false;
+    #endregion
 
-
+    #region GravityInvertedRule
     private RuleListener gravityInvertedRuleListener;
     private bool gravityInverted;
     private void InvertGravity() {
@@ -44,6 +60,7 @@ public class PlayerJump : MonoBehaviour
         rb.gravityScale = Mathf.Abs(rb.gravityScale);
         transform.localScale = new Vector3(1f, 1f, 1f);
     }
+    #endregion
 
     private void Awake()
     {
@@ -56,26 +73,36 @@ public class PlayerJump : MonoBehaviour
         gravityInvertedRuleListener = new RuleListener(invertedGravityRule, InvertGravity, MakeGravityNormal);
         gravityInvertedRuleListener.AddSubscription();
 
+        jumpCounter = new CounterWithDefault(doubleJumpRule.IsActive ? 2 : 1);
+        doubleJumpRuleListener = new RuleListener(doubleJumpRule, SetDoubleJump, SetOneJump);
+        doubleJumpRuleListener.AddSubscription();
+
         PlayerInputHandler.instance.OnJumpPressed += TryJump;
     }
 
     private void Update()
     {
         playerState.SetGrounded(IsGrounded());
+        if (playerState.IsGrounded) jumpCounter.SetToDefault();
     }
 
     private void OnDestroy()
     {
         jumpRuleListener.RemoveSubscription();
         gravityInvertedRuleListener.RemoveSubscription();
+        doubleJumpRuleListener.RemoveSubscription();
+
         PlayerInputHandler.instance.OnJumpPressed -= TryJump;
     }
 
     private void TryJump()
     {
-        if (!canJump || !playerState.IsGrounded) return;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, gravityInverted ? -movementConfig.jumpForce : movementConfig.jumpForce);
-        StartCoroutine(DisableGroundCheckAfterJump());
+        if (canJump && (playerState.IsGrounded || jumpCounter.CurrentValueBigerThanZero() ))
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, gravityInverted ? -movementConfig.jumpForce : movementConfig.jumpForce);
+            jumpCounter.ChangeCounter(-1);
+            StartCoroutine(DisableGroundCheckAfterJump());
+        }
     }
 
 

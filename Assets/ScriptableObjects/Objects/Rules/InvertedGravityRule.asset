@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruleName: InvertedGravity
   ruleDescription: The gravity is inverted
-  ruleSprite: {fileID: 21300000, guid: d4de479a18b6e4c4ca0056f5d01ab34c, type: 3}
+  ruleSprite: {fileID: 21300000, guid: 7d74415384438d048aa77c918fb2caee, type: 3}

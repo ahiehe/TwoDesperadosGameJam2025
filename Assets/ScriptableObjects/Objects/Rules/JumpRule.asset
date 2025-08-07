@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruleName: Jump
   ruleDescription: You can jump.
-  ruleSprite: {fileID: 21300000, guid: d4de479a18b6e4c4ca0056f5d01ab34c, type: 3}
+  ruleSprite: {fileID: 21300000, guid: 41e64bc12902c0b4395556ccaf567d6b, type: 3}

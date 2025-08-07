@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ef031d48863dd14e8a5e12e33738ee9, type: 3}
-  m_Name: MovementRule
+  m_Name: DoubleJumpRule
   m_EditorClassIdentifier: 
-  ruleName: Move
-  ruleDescription: You can move
-  ruleSprite: {fileID: 21300000, guid: de252920cf669c9478bfbbb0dc142050, type: 3}
+  ruleName: DoubleJumpRule
+  ruleDescription: You can perform a double jump
+  ruleSprite: {fileID: 21300000, guid: dbc45d5bb8524914e9c5043a877e2f05, type: 3}
