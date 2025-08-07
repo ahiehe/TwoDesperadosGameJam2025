@@ -20,8 +20,10 @@ public class PlayerJump : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D colider;
 
+    [Header("Walkable layer")]
+    [SerializeField] LayerMask groundLayer;
 
-    [SerializeField] LayerMask groundMask;
+
     private Vector2 boxCenter;
     private Vector2 boxSize;
     private bool checkForGroundEnabled = true;
@@ -114,7 +116,7 @@ public class PlayerJump : MonoBehaviour
             ( (gravityInverted ? Vector2.up : Vector2.down) * (colider.bounds.extents.y + movementConfig.groundCheckHeight / 2f));
         boxSize = new Vector2(colider.bounds.size.x * 0.8f, movementConfig.groundCheckHeight);
 
-        var groundCheckbox = Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundMask);
+        var groundCheckbox = Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer);
         if (groundCheckbox != null) return true;
         return false;
     }

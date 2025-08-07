@@ -1370,7 +1370,7 @@ PrefabInstance:
     - target: {fileID: 1954151203417343231, guid: 8314467e156076f4d946dff12f9deb72, type: 3}
       propertyPath: rule
       value: 
-      objectReference: {fileID: 11400000, guid: 4c6fcc79f602c54459dbc0f55a4f678a, type: 2}
+      objectReference: {fileID: 11400000, guid: f2d43db206a2dcc4684ebd8b0da91ba6, type: 2}
     - target: {fileID: 5289367707402305595, guid: 8314467e156076f4d946dff12f9deb72, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.9926112
@@ -1726,12 +1726,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 26e29eacb876f9b4cbb090d6f86ebe59, type: 2}
   - {fileID: 11400000, guid: 39471cc8bd2a6154e8f238eee4cc8949, type: 2}
   - {fileID: 11400000, guid: 51a6aa11575dcfd44ac4c745da2614b7, type: 2}
-  - {fileID: 11400000, guid: 4c6fcc79f602c54459dbc0f55a4f678a, type: 2}
+  - {fileID: 11400000, guid: f2d43db206a2dcc4684ebd8b0da91ba6, type: 2}
   - {fileID: 11400000, guid: 19b08b08c0d638f40b262d1fc99cd996, type: 2}
   startingRules:
   - {fileID: 11400000, guid: 51a6aa11575dcfd44ac4c745da2614b7, type: 2}
   - {fileID: 11400000, guid: 26e29eacb876f9b4cbb090d6f86ebe59, type: 2}
-  - {fileID: 11400000, guid: 19b08b08c0d638f40b262d1fc99cd996, type: 2}
+  - {fileID: 11400000, guid: 39471cc8bd2a6154e8f238eee4cc8949, type: 2}
 --- !u!1 &1544490135
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,7 +2278,7 @@ PrefabInstance:
     - target: {fileID: 1954151203417343231, guid: 8314467e156076f4d946dff12f9deb72, type: 3}
       propertyPath: rule
       value: 
-      objectReference: {fileID: 11400000, guid: 39471cc8bd2a6154e8f238eee4cc8949, type: 2}
+      objectReference: {fileID: 11400000, guid: 19b08b08c0d638f40b262d1fc99cd996, type: 2}
     - target: {fileID: 5289367707402305595, guid: 8314467e156076f4d946dff12f9deb72, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.7456946

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BasicEnemy : EnemyNavigation
+public class BasicEnemy : EnemyNavigation, IDamageble
 {
     private bool flipped = false;
 

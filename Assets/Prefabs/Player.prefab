@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6327636074118504684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7015641710996549494}
+  m_Layer: 7
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7015641710996549494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6327636074118504684}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.186, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1189758394426123322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6460421740670537289
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1189758394426123322}
+  - component: {fileID: -2357930914599488915}
   - component: {fileID: 658712932034758543}
   - component: {fileID: 8792629969841419793}
   - component: {fileID: 4153790896080983902}
@@ -35,8 +67,28 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8352306103052668133}
+  - {fileID: 7015641710996549494}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2357930914599488915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460421740670537289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec8cd4422a0032448de372a8c3af3f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackConfig: {fileID: 11400000, guid: 4919a322765ce1f468bdb363f5d8eb09, type: 2}
+  playerCanAttackRule: {fileID: 11400000, guid: f2d43db206a2dcc4684ebd8b0da91ba6, type: 2}
+  playerState: {fileID: 11400000, guid: aa7e16c629541ef44b20d56cb3e38517, type: 2}
+  attackableLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  attackPoint: {fileID: 7015641710996549494}
 --- !u!114 &658712932034758543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +134,7 @@ MonoBehaviour:
   doubleJumpRule: {fileID: 11400000, guid: 19b08b08c0d638f40b262d1fc99cd996, type: 2}
   playerSpriteObject: {fileID: 7578150465002674882}
   playerState: {fileID: 11400000, guid: aa7e16c629541ef44b20d56cb3e38517, type: 2}
-  groundMask:
+  groundLayer:
     serializedVersion: 2
     m_Bits: 8
 --- !u!50 &2839612261751277516

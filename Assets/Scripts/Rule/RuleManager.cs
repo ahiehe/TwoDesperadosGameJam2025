@@ -21,7 +21,7 @@ public class RuleManager : MonoBehaviour
         instance = this;
 
         DeactivateAllRules();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < startingRules.Count; i++)
         {
             AddRule(startingRules[i]);
             ActivateRule(startingRules[i].ruleName);
