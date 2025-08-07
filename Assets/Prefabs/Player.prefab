@@ -80,6 +80,7 @@ MonoBehaviour:
   jumpRule: {fileID: 11400000, guid: 39471cc8bd2a6154e8f238eee4cc8949, type: 2}
   invertedGravityRule: {fileID: 11400000, guid: 26e29eacb876f9b4cbb090d6f86ebe59, type: 2}
   playerSpriteObject: {fileID: 7578150465002674882}
+  playerState: {fileID: 11400000, guid: aa7e16c629541ef44b20d56cb3e38517, type: 2}
   groundMask:
     serializedVersion: 2
     m_Bits: 8

@@ -13,6 +13,9 @@ public class PlayerJump : MonoBehaviour
     [Header("Player sprite")]
     [SerializeField] GameObject playerSpriteObject;
 
+    [Header("Player state")]
+    [SerializeField] PlayerState playerState;
+
     private Rigidbody2D rb;
     private Collider2D colider;
 
@@ -56,6 +59,11 @@ public class PlayerJump : MonoBehaviour
         PlayerInputHandler.instance.OnJumpPressed += TryJump;
     }
 
+    private void Update()
+    {
+        playerState.SetGrounded(IsGrounded());
+    }
+
     private void OnDestroy()
     {
         jumpRuleListener.RemoveSubscription();
@@ -65,7 +73,7 @@ public class PlayerJump : MonoBehaviour
 
     private void TryJump()
     {
-        if (!canJump || !IsGrounded()) return;
+        if (!canJump || !playerState.IsGrounded) return;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, gravityInverted ? -movementConfig.jumpForce : movementConfig.jumpForce);
         StartCoroutine(DisableGroundCheckAfterJump());
     }

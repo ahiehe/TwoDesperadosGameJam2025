@@ -5,10 +5,20 @@ using UnityEngine.EventSystems;
 public class RuleDropSlot : RuleCard, IDropHandler
 {
 
-    public void Setup()
+    private RuleSelectionPanel ruleSelectionPanel;
+
+    public void Setup(RuleSelectionPanel ruleSelectionPanel)
     {
         ruleDescription.gameObject.SetActive(false);
         ruleSprite.gameObject.SetActive(false);
+        isDragable = false;
+        this.ruleSelectionPanel = ruleSelectionPanel;
+    }
+
+    public void Setup(ScriptableRule ruleInfo, RuleSelectionPanel ruleSelectionPanel)
+    {
+        base.Setup(ruleInfo);
+        this.ruleSelectionPanel = ruleSelectionPanel;
     }
 
     //drop rulecard from unselected zone
@@ -24,7 +34,7 @@ public class RuleDropSlot : RuleCard, IDropHandler
 
         RuleManager.instance.ActivateRule(scriptableRule.ruleName);
         Destroy(eventData.pointerDrag.gameObject);
-        RuleSelectionPanel.instance.RefreshUI();
+        ruleSelectionPanel.RefreshUI();
         
     }
 

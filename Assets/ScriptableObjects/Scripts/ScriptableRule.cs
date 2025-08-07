@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScriptableRule : ScriptableObject
 {
     public string ruleName;
+    public string ruleDescription;
     public Sprite ruleSprite;
 
     public bool IsActive { get; private set; }

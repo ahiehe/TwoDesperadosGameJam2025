@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 
 public class InactiveRuleZone : MonoBehaviour, IDropHandler
 {
+    [SerializeField] private RuleSelectionPanel ruleSelectionPanel;
+
     //drop rulecard from selected zone
     public void OnDrop(PointerEventData eventData)
     {
@@ -17,6 +19,6 @@ public class InactiveRuleZone : MonoBehaviour, IDropHandler
 
         RuleManager.instance.DeactivateRule(scriptableRule.ruleName);
         Destroy(eventData.pointerDrag.gameObject);
-        RuleSelectionPanel.instance.RefreshUI();
+        ruleSelectionPanel.RefreshUI();
     }
 }

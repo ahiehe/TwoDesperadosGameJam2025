@@ -2,20 +2,30 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("UI panels")]
     [SerializeField] private GameObject GameplayPanel;
     [SerializeField] private GameObject RuleSelectionPanel;
+
+    [Header("States")]
+    [SerializeField] private PlayerState playerState;
 
     private UIState curState;
     private void Start()
     {
-        PlayerInputHandler.instance.OnRuleMenuToggled += () => SetActiveUI(UIState.RuleSelection);
+        PlayerInputHandler.instance.OnRuleMenuToggled += OpenRuleSelectionPanel;
     }
 
     private void OnDestroy()
     {
-        PlayerInputHandler.instance.OnRuleMenuToggled -= () => SetActiveUI(UIState.RuleSelection);
+        PlayerInputHandler.instance.OnRuleMenuToggled -= OpenRuleSelectionPanel;
     }
 
+
+    private void OpenRuleSelectionPanel()
+    {
+        if (!playerState.IsGrounded && curState != UIState.RuleSelection) return;
+        SetActiveUI(UIState.RuleSelection);
+    }
 
     private void SetActiveUI(UIState state)
     {

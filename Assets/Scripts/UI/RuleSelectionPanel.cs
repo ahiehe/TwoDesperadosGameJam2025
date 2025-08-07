@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RuleSelectionPanel : MonoBehaviour
 {
-    public static RuleSelectionPanel instance;
 
     [Header("UI References")]
     [SerializeField] private Transform activeRulesContainer;
@@ -14,10 +13,6 @@ public class RuleSelectionPanel : MonoBehaviour
     [SerializeField] private GameObject ruleDropSlotPrefab;
     [SerializeField] private GameObject ruleCardPrefab; 
 
-    private void Awake()
-    {
-        instance = this;
-    }
 
     private void OnEnable()
     {
@@ -43,13 +38,13 @@ public class RuleSelectionPanel : MonoBehaviour
         foreach (ScriptableRule rule in activeRules)
         {
             GameObject slot = Instantiate(ruleDropSlotPrefab, activeRulesContainer);
-            slot.GetComponent<RuleDropSlot>().Setup(rule);
+            slot.GetComponent<RuleDropSlot>().Setup(rule, this);
         }
 
         for (int i = activeRules.Count; i < 3; i++)
         {
             GameObject slot = Instantiate(ruleDropSlotPrefab, activeRulesContainer);
-            slot.GetComponent<RuleDropSlot>().Setup();
+            slot.GetComponent<RuleDropSlot>().Setup(this);
         }
 
         List<ScriptableRule> inactiveRules = RuleManager.instance.GetInactiveRules();

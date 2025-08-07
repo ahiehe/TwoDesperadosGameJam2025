@@ -447,6 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameplayPanel: {fileID: 58263462}
   RuleSelectionPanel: {fileID: 1298360455}
+  playerState: {fileID: 11400000, guid: aa7e16c629541ef44b20d56cb3e38517, type: 2}
 --- !u!1 &236448527
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,6 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924ec21417c190343ac78c8747bade0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ruleSelectionPanel: {fileID: 1298360457}
 --- !u!1 &433878592
 GameObject:
   m_ObjectHideFlags: 0
