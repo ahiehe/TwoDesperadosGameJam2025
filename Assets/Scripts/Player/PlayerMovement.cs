@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     {
         this.moveInput = moveInput;
 
-        playerState.SetIdle(moveInput.x == 0);
+        playerState.SetIdle(!canMove || moveInput.x == 0);
     }
 
     private void CheckFlip(float direction)
