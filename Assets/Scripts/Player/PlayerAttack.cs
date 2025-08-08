@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("Player state")]
+    [SerializeField] private PlayerState playerState;
+
     [Header("Config")]
     [SerializeField] private AttackConfig attackConfig;
 
     [Header("Rules")]
     [SerializeField] private ScriptableRule playerCanAttackRule;
-
-    [Header("Player state")]
-    [SerializeField] private PlayerState playerState;
 
     [Header("Walkable layer")]
     [SerializeField] private LayerMask attackableLayer;
@@ -51,6 +51,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!canAttack || !playerState.IsGrounded || !attackTimer.CooldownCompleted()) return;
 
+        playerState.SetAttacking(true);
         hits = Physics2D.CircleCastAll(attackPoint.position, attackConfig.swingRange, transform.right, 0, attackableLayer);
 
         for (int i = 0; i < hits.Length; i++)
@@ -60,5 +61,6 @@ public class PlayerAttack : MonoBehaviour
 
         }
         attackTimer.ResetCooldown();
+        playerState.SetAttacking(false);
     }
 }

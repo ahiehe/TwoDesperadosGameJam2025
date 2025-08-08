@@ -2,7 +2,7 @@
 - Project name: TwoDesperadosGameJam2025
 - Unity version: Unity 6000.1.14f1
 - Active game object:
-  - Name: EventSystem
+  - Name: BluePlatform
   - Tag: Untagged
-  - Layer: Default
+  - Layer: Ground
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

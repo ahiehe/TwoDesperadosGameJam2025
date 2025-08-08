@@ -32,12 +32,12 @@ public class GameplayPanel : MonoBehaviour
             RefreshUI();
         }
 
-        playerState.IsGroundedChanged += ChangeAlpha;
+        playerState.OnGroundedChanged += ChangeAlpha;
     }
 
     private void OnDisable()
     {
-        playerState.IsGroundedChanged -= ChangeAlpha;
+        playerState.OnGroundedChanged -= ChangeAlpha;
     }
 
     private void ChangeAlpha(bool isGrounded)

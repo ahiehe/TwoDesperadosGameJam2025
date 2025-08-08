@@ -15,14 +15,14 @@ public class ScriptableRule : ScriptableObject
 
     public void Activate()
     {
-        if (IsActive) return;
+        //if (IsActive) return;
         IsActive = true;
         OnActivated?.Invoke();
     }
 
     public void Deactivate()
     {
-        if (!IsActive) return;
+        //if (!IsActive) return;
         IsActive = false;
         OnDeactivated?.Invoke();
     }

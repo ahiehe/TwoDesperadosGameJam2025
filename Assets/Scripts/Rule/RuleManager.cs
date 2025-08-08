@@ -28,7 +28,7 @@ public class RuleManager : MonoBehaviour
         }
     }
 
-    private void DeactivateAllRules()
+    public void DeactivateAllRules()
     {
         foreach (var rule in allRulesOnThisLevel)
         {
