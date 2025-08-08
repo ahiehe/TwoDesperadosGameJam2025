@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] private PlayerSpawner playerSpawner;
+
     public static CameraController instance {  get; private set; }
     private CinemachineVirtualCamera virtualCam;
 
@@ -35,7 +37,7 @@ public class CameraController : MonoBehaviour
 
     private void FollowPlayer()
     {
-        SetFollow(PlayerSpawner.PlayerObject.transform);
+        SetFollow(playerSpawner.PlayerObject.transform);
     }
 
     public void SetFollow(Transform followPos)

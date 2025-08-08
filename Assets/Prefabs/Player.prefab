@@ -114,8 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1aeb5520e361240a9aff2c38766393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerState: {fileID: 11400000, guid: aa7e16c629541ef44b20d56cb3e38517, type: 2}
   movementConfig: {fileID: 11400000, guid: fff86482a94b70641b55b2792715df35, type: 2}
   movementRule: {fileID: 11400000, guid: 51a6aa11575dcfd44ac4c745da2614b7, type: 2}
+  fastSpeedRule: {fileID: 11400000, guid: 8b93327e9def6ee44b16823102363e32, type: 2}
 --- !u!114 &4153790896080983902
 MonoBehaviour:
   m_ObjectHideFlags: 0

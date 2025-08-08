@@ -50,7 +50,6 @@ public class PlayerAttack : MonoBehaviour
     private void TryAttack()
     {
         if (!canAttack || !playerState.IsGrounded || !attackTimer.CooldownCompleted()) return;
-        Debug.Log("Attack!");
 
         hits = Physics2D.CircleCastAll(attackPoint.position, attackConfig.swingRange, transform.right, 0, attackableLayer);
 

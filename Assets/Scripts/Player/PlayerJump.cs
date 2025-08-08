@@ -23,10 +23,11 @@ public class PlayerJump : MonoBehaviour
     [Header("Walkable layer")]
     [SerializeField] LayerMask groundLayer;
 
-
     private Vector2 boxCenter;
     private Vector2 boxSize;
     private bool checkForGroundEnabled = true;
+    private Timer groundCheckTimer = new Timer(0.05f);
+
 
     #region DoubleJumpRule
     private RuleListener doubleJumpRuleListener;
@@ -84,8 +85,13 @@ public class PlayerJump : MonoBehaviour
 
     private void Update()
     {
-        playerState.SetGrounded(IsGrounded());
-        if (playerState.IsGrounded) jumpCounter.SetToDefault();
+        groundCheckTimer.SubstractTime(Time.deltaTime);
+        if (groundCheckTimer.CooldownCompleted())
+        {
+            playerState.SetGrounded(IsGrounded());
+            if (playerState.IsGrounded) jumpCounter.SetToDefault();
+            groundCheckTimer.ResetCooldown();
+        } 
     }
 
     private void OnDestroy()

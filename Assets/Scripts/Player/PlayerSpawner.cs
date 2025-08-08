@@ -5,7 +5,7 @@ using System;
 public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
-    public static GameObject PlayerObject { get; private set; }
+    public GameObject PlayerObject { get; private set; }
 
     public static event Action OnPlayerCreation;
     private void Awake()

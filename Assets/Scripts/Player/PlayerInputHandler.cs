@@ -11,6 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action OnJumpPressed;
     public event Action OnAttackPressed;
     public event Action OnRuleMenuToggled;
+    public event Action OnPauseToggled;
 
 
     private void Awake()
@@ -23,6 +24,7 @@ public class PlayerInputHandler : MonoBehaviour
         inputActions.Player.Jump.performed += ctx => OnJumpPressed?.Invoke();
         inputActions.Player.Attack.performed += ctx => OnAttackPressed?.Invoke();
         inputActions.Player.ToggleRuleMenu.performed += ctx => OnRuleMenuToggled?.Invoke();
+        inputActions.Player.Pause.performed += ctx => OnPauseToggled?.Invoke();
 
     }
 

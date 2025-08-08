@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ef031d48863dd14e8a5e12e33738ee9, type: 3}
-  m_Name: PlayerAttackRule
+  m_Name: FastSpeedRule
   m_EditorClassIdentifier: 
-  ruleName: PlayerAttack
-  ruleDescription: You can attack some enemies
-  ruleSprite: {fileID: 21300000, guid: 04d56b3d98c275043aaea65485422155, type: 3}
+  ruleName: FastSpeed
+  ruleDescription: You have increased speed
+  ruleSprite: {fileID: 21300000, guid: fc779bafd88a8c041b16ee5cb7b24c19, type: 3}
