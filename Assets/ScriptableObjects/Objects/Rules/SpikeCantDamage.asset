@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef031d48863dd14e8a5e12e33738ee9, type: 3}
   m_Name: SpikeCantDamage
   m_EditorClassIdentifier: 
-  ruleName: SpikeCantDamage
-  ruleDescription: Spike can't damage you
+  ruleName: SpikesCantDamage
+  ruleDescription: Spikes can't damage you
   ruleSprite: {fileID: 21300000, guid: bc4570c80983fa04b999bb69315d1abe, type: 3}

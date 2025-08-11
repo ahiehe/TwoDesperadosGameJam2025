@@ -9,6 +9,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject levelsPanel;
     [SerializeField] private GameObject lorePanel;
+    [SerializeField] private GameObject deleteSavesPanel;
 
     [Header("Levels UI")]
     [SerializeField] private Transform levelButtonsParent; 
@@ -33,6 +34,15 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(savedLevel);
     }
 
+    public void DeleteSaves()
+    {
+        ProgressManager.DeleteSaves();
+        DeleteLevelButtons();
+        GenerateLevelButtons();
+        OpenMainMenu();
+    }
+
+    #region Panels
     public void OpenMainMenu()
     {
         OpenPanel(MainMenuUIState.MainMenu);
@@ -48,6 +58,13 @@ public class MainMenuManager : MonoBehaviour
         OpenPanel(MainMenuUIState.Lore);
     }
 
+    public void OpenDeleteConfirmationPanel()
+    {
+        OpenPanel(MainMenuUIState.DeleteConfirmation);
+    }
+
+    #endregion
+
     public void OpenLevelByIndex(int index)
     {
         SceneManager.LoadScene(index);
@@ -59,6 +76,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenu.SetActive(mainMenuState == MainMenuUIState.MainMenu);
         levelsPanel.SetActive(mainMenuState == MainMenuUIState.Levels);
         lorePanel.SetActive(mainMenuState == MainMenuUIState.Lore);
+        deleteSavesPanel.SetActive(mainMenuState == MainMenuUIState.DeleteConfirmation);
     }
 
     private void GenerateLevelButtons()
@@ -84,10 +102,18 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
+    private void DeleteLevelButtons()
+    {
+        foreach (Transform levelButton in levelButtonsParent){
+            Destroy(levelButton.gameObject);
+        }
+    }
+
     public enum MainMenuUIState
     {
         MainMenu,
         Levels,
-        Lore
+        Lore,
+        DeleteConfirmation
     }
 }

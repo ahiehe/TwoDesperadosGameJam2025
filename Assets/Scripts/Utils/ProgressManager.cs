@@ -14,4 +14,9 @@ public class ProgressManager
     {
         return PlayerPrefs.GetInt("Level", 1); 
     }
+
+    public static void DeleteSaves()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
