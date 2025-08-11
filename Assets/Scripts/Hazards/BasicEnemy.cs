@@ -48,5 +48,21 @@ public class BasicEnemy : EnemyNavigation, IDamageble
         {
             collision.gameObject.GetComponent<PlayerHealth>().Die();
         }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Rotate();
+        }
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+
+        var col = GetComponent<BoxCollider2D>();
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(col.bounds.center, col.bounds.size);
+
+    }
+
+#endif
 }

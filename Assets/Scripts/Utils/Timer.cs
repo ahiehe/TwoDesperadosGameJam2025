@@ -19,12 +19,12 @@ public class Timer
         }
     }
 
-    public bool CooldownCompleted()
+    public bool TimerCompleted()
     {
         return currentTime <= 0;
     }
 
-    public void ResetCooldown()
+    public void ResetTimer()
     {
         currentTime = cooldownTime;
     }

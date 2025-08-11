@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad466722e9358540a183ec01b8b7d0d, type: 3}
   m_Name: MovementConfig
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  movementSpeed: 4
   jumpForce: 7
   groundCheckHeight: 0.2

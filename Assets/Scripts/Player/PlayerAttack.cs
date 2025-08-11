@@ -49,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void TryAttack()
     {
-        if (!canAttack || !playerState.IsGrounded || !attackTimer.CooldownCompleted()) return;
+        if (!canAttack || !playerState.IsGrounded || !attackTimer.TimerCompleted()) return;
 
         playerState.SetAttacking(true);
         hits = Physics2D.CircleCastAll(attackPoint.position, attackConfig.swingRange, transform.right, 0, attackableLayer);
@@ -60,7 +60,7 @@ public class PlayerAttack : MonoBehaviour
             script?.TakeDamage(0);
 
         }
-        attackTimer.ResetCooldown();
+        attackTimer.ResetTimer();
         playerState.SetAttacking(false);
     }
 }

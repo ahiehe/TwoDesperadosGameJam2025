@@ -42,11 +42,11 @@ GameObject:
   - component: {fileID: 1496016075641119919}
   - component: {fileID: 4233410431792495382}
   - component: {fileID: 66497646166613025}
-  - component: {fileID: 2639074705827698442}
   - component: {fileID: 712478511895537255}
+  - component: {fileID: 8131591163891306046}
   m_Layer: 8
   m_Name: HedgehogEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,6 +83,7 @@ MonoBehaviour:
   rightBorder: {fileID: 725549187123268047}
   walkSpeed: 5
   anim: {fileID: 3897930804365109595}
+  invertedGravityRule: {fileID: 11400000, guid: 26e29eacb876f9b4cbb090d6f86ebe59, type: 2}
 --- !u!50 &66497646166613025
 Rigidbody2D:
   serializedVersion: 5
@@ -99,7 +100,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b90b5ca9a2670534d8b1ff9472a74731, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -108,54 +109,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &2639074705827698442
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3420342717340338017}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.054031372, y: 0.065737456}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.9289541, y: 0.3266273}
-  m_EdgeRadius: 0
 --- !u!61 &712478511895537255
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -190,7 +145,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.035940886, y: -0.21439302}
+  m_Offset: {x: -0.045042336, y: -0.22327662}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -200,8 +155,45 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7999644, y: 0.1474992}
+  m_Size: {x: 0.5948068, y: 0.07939161}
   m_EdgeRadius: 0
+--- !u!70 &8131591163891306046
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3420342717340338017}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.018895958, y: 0.005399524}
+  m_Size: {x: 0.95681506, y: 0.35214114}
+  m_Direction: 1
 --- !u!1 &4264737125183959713
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +205,7 @@ GameObject:
   - component: {fileID: 3106164663654987854}
   m_Layer: 8
   m_Name: HedgehogEnvironment
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

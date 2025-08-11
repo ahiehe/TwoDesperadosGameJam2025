@@ -40,6 +40,11 @@ public class UIManager : MonoBehaviour
         PlayerInputHandler.instance.OnPauseToggled -= OpenPauseMenu;
     }
 
+    public void OpenGameplayPanel()
+    {
+        SetActiveUI(UIState.Gameplay);
+    }
+
     private void OpenPauseMenu()
     {
         SetActiveUI(UIState.Pause);

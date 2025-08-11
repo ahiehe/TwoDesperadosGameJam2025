@@ -27,7 +27,9 @@ public class PlayerJump : MonoBehaviour
     private Vector2 boxSize;
     private bool checkForGroundEnabled = true;
     private Timer groundCheckTimer = new Timer(0.05f);
+    private Timer coyoteTimer = new Timer(0.1f);
 
+    private bool isJumped = false;
 
     #region DoubleJumpRule
     private RuleListener doubleJumpRuleListener;
@@ -35,10 +37,12 @@ public class PlayerJump : MonoBehaviour
     private void SetDoubleJump()
     {
         jumpCounter.SetDefault(2);
+        jumpCounter.SetToDefault();
     }
     private void SetOneJump()
     {
         jumpCounter.SetDefault(1);
+        jumpCounter.SetToDefault();
     }
     #endregion
 
@@ -55,13 +59,13 @@ public class PlayerJump : MonoBehaviour
     private void InvertGravity() {
         gravityInverted = true;
         rb.gravityScale = -Mathf.Abs(rb.gravityScale);
-        transform.localScale = new Vector3(1f, -1f, 1f);
+        transform.localScale = new Vector3(transform.localScale.x, -1f, transform.localScale.z);
     }
     private void MakeGravityNormal()
     {
         gravityInverted = false;
         rb.gravityScale = Mathf.Abs(rb.gravityScale);
-        transform.localScale = new Vector3(1f, 1f, 1f);
+        transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z);
     }
     #endregion
 
@@ -81,42 +85,78 @@ public class PlayerJump : MonoBehaviour
         doubleJumpRuleListener.AddSubscription();
 
         PlayerInputHandler.instance.OnJumpPressed += TryJump;
-    }
+        PlayerInputHandler.instance.OnJumpReleased += StopJump;
 
-    private void Update()
-    {
-        groundCheckTimer.SubstractTime(Time.deltaTime);
-        if (groundCheckTimer.CooldownCompleted())
-        {
-            playerState.SetGrounded(IsGrounded());
-            if (playerState.IsGrounded) jumpCounter.SetToDefault();
-            groundCheckTimer.ResetCooldown();
-        } 
+        playerState.OnGroundedChanged += OnGroundedChanged;
     }
-
-    private void OnDestroy()
+    private void OnDisable()
     {
         jumpRuleListener.RemoveSubscription();
         gravityInvertedRuleListener.RemoveSubscription();
         doubleJumpRuleListener.RemoveSubscription();
 
         PlayerInputHandler.instance.OnJumpPressed -= TryJump;
+        PlayerInputHandler.instance.OnJumpReleased -= StopJump;
+
+        playerState.OnGroundedChanged -= OnGroundedChanged;
+    }
+
+    private void OnGroundedChanged(bool isGrounded)
+    {
+        ManageJumpCounter(isGrounded);
+        coyoteTimer.ResetTimer();
+    }
+
+    private void ManageJumpCounter(bool isGrounded)
+    {
+        if (isGrounded)
+        {
+            jumpCounter.SetToDefault();
+            isJumped = false;
+        }
+
+        if (!isGrounded && !isJumped)
+        {
+            jumpCounter.ChangeCounter(-1);
+        }
+
+    }
+
+    private void Update()
+    {
+        groundCheckTimer.SubstractTime(Time.deltaTime);
+        coyoteTimer.SubstractTime(Time.deltaTime);
+        if (groundCheckTimer.TimerCompleted())
+        {
+            playerState.SetGrounded(IsGrounded());
+            groundCheckTimer.ResetTimer();
+        } 
     }
 
     private void TryJump()
     {
-        if (canJump && (playerState.IsGrounded || jumpCounter.CurrentValueBigerThanZero() ))
+        if (canJump && (!coyoteTimer.TimerCompleted() || jumpCounter.CurrentValueBigerThanZero() ))
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, gravityInverted ? -movementConfig.jumpForce : movementConfig.jumpForce);
             jumpCounter.ChangeCounter(-1);
             StartCoroutine(DisableGroundCheckAfterJump());
+            isJumped = true;
         }
+    }
+
+    private void StopJump()
+    {
+        if (!canJump || rb.linearVelocity.y <= 0) return;
+        
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+        
     }
 
 
     private bool IsGrounded()
     {
         if (!checkForGroundEnabled) return false;
+
 
         boxCenter = new Vector2(colider.bounds.center.x, colider.bounds.center.y) + 
             ( (gravityInverted ? Vector2.up : Vector2.down) * (colider.bounds.extents.y + movementConfig.groundCheckHeight / 2f));

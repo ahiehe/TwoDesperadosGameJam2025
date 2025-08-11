@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: aef67fe873eed0246b33291e9b90bc27
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - leftBorder: {instanceID: 0}
+  - rightBorder: {instanceID: 0}
+  - anim: {instanceID: 0}
+  - invertedGravityRule: {fileID: 11400000, guid: 26e29eacb876f9b4cbb090d6f86ebe59, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

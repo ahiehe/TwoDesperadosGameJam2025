@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinPanel : MonoBehaviour
 {
@@ -13,5 +14,21 @@ public class WinPanel : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 
+    public void GoToNextLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (SceneManager.sceneCountInBuildSettings == currentSceneIndex + 1)
+        {
+            ReturnToMainMenu();
+        }
+        else
+        {
+            SceneManager.LoadScene(currentSceneIndex + 1);
+        }
+    }
 }
