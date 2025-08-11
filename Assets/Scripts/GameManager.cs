@@ -8,10 +8,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerState playerState;
     [SerializeField] private PlayerSpawner playerSpawner;
 
-    private void Awake()
-    {
-        ProgressManager.SaveLevel(SceneManager.GetActiveScene().buildIndex);
-    }
 
     public void EndLevel()
     {
@@ -22,6 +18,7 @@ public class GameManager : MonoBehaviour
     {
         playerState.SetInteraction(false);
         RuleManager.instance.DeactivateAllRules();
+        ProgressManager.SaveLevel(SceneManager.GetActiveScene().buildIndex+1);
         playerSpawner.PlayerObject.SetActive(false);
         yield return new WaitForSeconds(1.0f);
         uimanager.OpenWinMenu();
