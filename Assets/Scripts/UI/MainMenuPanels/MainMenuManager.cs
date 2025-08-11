@@ -21,6 +21,11 @@ public class MainMenuManager : MonoBehaviour
         GenerateLevelButtons();
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
     public void OpenLevel()
     {
         int savedLevel = ProgressManager.GetLastLevel();
